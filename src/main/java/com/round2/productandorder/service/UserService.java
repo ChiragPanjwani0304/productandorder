@@ -1,6 +1,5 @@
 package com.round2.productandorder.service;
 
-import com.round2.productandorder.dto.RegisterRequest;
 import com.round2.productandorder.dto.RegisterRequestDTO;
 import com.round2.productandorder.entity.Cart;
 import com.round2.productandorder.entity.User;

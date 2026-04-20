@@ -1,8 +1,6 @@
 package com.round2.productandorder.service;
 
-import com.round2.productandorder.dto.ProductRequest;
 import com.round2.productandorder.dto.ProductRequestDTO;
-import com.round2.productandorder.dto.ProductResponse;
 import com.round2.productandorder.dto.ProductResponseDTO;
 import com.round2.productandorder.entity.Product;
 import com.round2.productandorder.exception.ResourceNotFoundException;
@@ -71,7 +69,7 @@ public class ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
     }
 
-    private void mapRequestToProduct(ProductRequest request, Product product) {
+    private void mapRequestToProduct(ProductRequestDTO request, Product product) {
         product.setName(request.getName());
         product.setDescription(request.getDescription());
         product.setPrice(request.getPrice());
