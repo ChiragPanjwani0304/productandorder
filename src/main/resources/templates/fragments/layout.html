@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!--/* ── <head> fragment ── */-->
+<head th:fragment="head(title)">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="'Shop ' + ${title}">Shop</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/layout.css}"/>
+    <link rel="stylesheet" th:href="@{/css/components.css}"/>
+</head>
+
+<nav th:fragment="navbar"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+     xmlns:th="http://www.thymeleaf.org">
+    <div class="navbar">
+        <a class="navbar-brand" th:href="@{/dashboard}">Shop</a>
+
+        <span sec:authorize="hasRole('ADMIN')">
+            <a class="navbar-link" th:href="@{/admin/products}">Products</a>
+        </span>
+
+        <span sec:authorize="hasRole('USER')">
+            <a class="navbar-link" th:href="@{/products}">Products</a>
+            <a class="navbar-link" th:href="@{/cart}">Cart</a>
+            <a class="navbar-link" th:href="@{/orders}">Orders</a>
+        </span>
+
+        <span sec:authorize="isAuthenticated()" class="navbar-user">
+            <span sec:authentication="name"></span>
+            &nbsp;&middot;&nbsp;
+            <form th:action="@{/logout}" method="post" style="display:inline;">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <button type="submit" class="btn-link">Logout</button>
+            </form>
+        </span>
+    </div>
+</nav>
+
+</html>

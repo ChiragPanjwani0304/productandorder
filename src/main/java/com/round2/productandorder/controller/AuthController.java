@@ -30,6 +30,11 @@ public class AuthController {
         return "auth/login";
     }
 
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/login";
+    }
+
     @GetMapping("/register")
     public String registerPage(Model model) {
         model.addAttribute("registerRequest", new RegisterRequestDTO());

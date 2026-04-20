@@ -1,8 +1,6 @@
 package com.round2.productandorder.controller;
 
 import com.round2.productandorder.dto.ProductRequestDTO;
-import com.round2.productandorder.dto.ProductRequestDTO;
-import com.round2.productandorder.dto.ProductResponseDTO;
 import com.round2.productandorder.dto.ProductResponseDTO;
 import com.round2.productandorder.service.ProductService;
 import jakarta.validation.Valid;
@@ -77,8 +75,6 @@ public class AdminProductController {
         productService.toggleEnabled(id);
         return "redirect:/admin/products";
     }
-
-    // ── REST API (for Postman / external testing) ──────────────────────────────
 
     @GetMapping("/api/products")
     @ResponseBody

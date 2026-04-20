@@ -45,8 +45,6 @@ public class OrderService {
 
         for (CartItem cartItem : cart.getCartItems()) {
             Product product = cartItem.getProduct();
-
-            // Re-check inventory inside transaction
             if (!product.isEnabled()) {
                 throw new BadRequestException("Product '" + product.getName() + "' is no longer available");
             }
@@ -57,11 +55,9 @@ public class OrderService {
                                 ", Requested: " + cartItem.getQuantity());
             }
 
-            // Deduct inventory
             product.setQuantity(product.getQuantity() - cartItem.getQuantity());
             productRepository.save(product);
 
-            // Build order item
             OrderItem orderItem = new OrderItem();
             orderItem.setOrder(order);
             orderItem.setProduct(product);
@@ -75,8 +71,6 @@ public class OrderService {
         order.setTotalAmount(total);
         order.setOrderItems(orderItems);
         Order saved = orderRepository.save(order);
-
-        // Clear cart after successful order
         cartService.clearCart(cart);
 
         return toResponse(saved);
@@ -96,8 +90,6 @@ public class OrderService {
         }
         return toResponse(order);
     }
-
-    // ── Mapper ─────────────────────────────────────────────────────────────────
 
     private OrderResponseDTO toResponse(Order order) {
         List<OrderResponseDTO.OrderItemResponse> items = order.getOrderItems().stream().map(oi -> {

@@ -36,7 +36,7 @@ public class UserService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(User.Role.USER);
+        user.setRole(request.getEmail().endsWith("@jforce.com") ? User.Role.ADMIN : User.Role.USER);
         user.setEnabled(true);
         userRepository.save(user);
 

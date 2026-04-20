@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Cart')}"></head>
+<body>
+
+<div th:replace="~{fragments/layout :: navbar}"></div>
+
+<div class="container">
+
+    <div class="page-header">
+        <span class="page-title">Your Cart</span>
+        <a th:href="@{/products}" class="btn btn-secondary btn-sm">Continue Shopping</a>
+    </div>
+
+    <div class="alert alert-error" th:if="${errorMsg}" th:text="${errorMsg}"></div>
+
+    <!-- Empty cart -->
+    <div th:if="${cart == null or cart.items.empty}" class="empty-state">
+        <p>Your cart is empty.</p>
+        <a th:href="@{/products}" class="btn btn-primary">Browse Products</a>
+    </div>
+
+    <!-- Cart with items -->
+    <div th:if="${cart != null and !cart.items.empty}" class="cart-layout">
+
+        <!-- Items table -->
+        <div class="cart-items-col">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Unit Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${cart.items}">
+                        <td class="td-name" th:text="${item.productName}"></td>
+                        <td th:text="'&#8377;' + ${item.price}"></td>
+                        <td>
+                            <form th:action="@{/cart/update/{id}(id=${item.cartItemId})}"
+                                  method="post" class="cart-qty-form">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                <input type="number" name="quantity"
+                                       th:value="${item.quantity}" min="1"/>
+                                <button type="submit" class="btn btn-secondary btn-sm">Update</button>
+                            </form>
+                        </td>
+                        <td th:text="'&#8377;' + ${item.subtotal}"></td>
+                        <td>
+                            <form th:action="@{/cart/remove/{id}(id=${item.cartItemId})}"
+                                  method="post">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Summary + place order -->
+        <div class="cart-summary-col">
+            <div class="summary-box">
+                <div class="summary-box-title">Order Summary</div>
+                <div class="summary-row">
+                    <span>Items (<span th:text="${cart.items.size()}"></span>)</span>
+                    <span th:text="'&#8377;' + ${cart.totalAmount}"></span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span th:text="'&#8377;' + ${cart.totalAmount}"></span>
+                </div>
+                <form th:action="@{/orders/place}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
