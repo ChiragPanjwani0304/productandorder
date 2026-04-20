@@ -26,7 +26,7 @@ public class CartController {
         this.userService = userService;
     }
 
-    // ── Views ──────────────────────────────────────────────────────────────────
+    //Views
 
     @GetMapping
     public String viewCart(Authentication authentication, Model model) {
@@ -67,7 +67,7 @@ public class CartController {
         return "redirect:/cart";
     }
 
-    // ── REST API ───────────────────────────────────────────────────────────────
+    //REST API
 
     @GetMapping("/api")
     @ResponseBody

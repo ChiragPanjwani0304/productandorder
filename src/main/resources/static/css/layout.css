@@ -1,0 +1,135 @@
+.container {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+
+.navbar {
+    background-color: #333;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.navbar-link {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.navbar-link:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-user {
+    margin-left: auto;
+    color: #ccc;
+    font-size: 13px;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0;
+}
+
+.btn-link:hover {
+    color: #fff;
+}
+
+/* Page header */
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Auth pages */
+.auth-wrapper {
+    max-width: 360px;
+    margin: 60px auto;
+    padding: 0 16px;
+}
+
+.auth-card {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 24px;
+}
+
+.auth-card h2 {
+    margin-bottom: 16px;
+}
+
+.auth-footer {
+    margin-top: 16px;
+    font-size: 13px;
+}
+
+/* Admin layout */
+.admin-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.admin-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.admin-main {
+    flex: 1;
+}
+
+/* Cart layout */
+.cart-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.cart-items-col {
+    flex: 1;
+}
+
+.cart-summary-col {
+    width: 240px;
+    flex-shrink: 0;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.empty-state {
+    padding: 40px 0;
+    color: #888;
+}
+
+.empty-state p {
+    margin-bottom: 12px;
+}
